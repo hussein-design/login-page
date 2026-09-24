@@ -155,11 +155,11 @@
 
     /* ── Card Body ───────────────────────────────────────────────── */
     .page-card-body {
-      padding: 24px 28px 0;
+      padding: 24px 28px 4px;
     }
 
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .form-label {
@@ -178,7 +178,7 @@
 
     .form-control {
       width: 100%;
-      padding: 9px 38px 9px 12px;
+      padding: 9px 40px 9px 12px;
       font-family: inherit;
       font-size: 0.875rem;
       color: var(--text-main);
@@ -199,7 +199,7 @@
     /* invalid state */
     .form-group.invalid .form-control { border-color: #EF4444; box-shadow: 0 0 0 3px rgba(239,68,68,.15); }
 
-    /* field icons */
+    /* field icons — right edge, vertically centred */
     .field-icon {
       position: absolute;
       right: 12px;
@@ -209,9 +209,10 @@
       pointer-events: none;
     }
 
+    /* password: eye toggle sits at right, lock icon shifts left of it */
     .toggle-password {
       position: absolute;
-      right: 12px;
+      right: 11px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-subtle);
@@ -219,16 +220,16 @@
       background: none;
       border: none;
       padding: 0;
+      line-height: 0;
     }
 
-    /* shift lock icon left when toggle eye is also present */
-    .password-field .password-icon { right: 36px; }
+    .password-field .password-icon { right: 34px; }
 
     .field-error {
       margin: 4px 0 0;
       font-size: 0.75rem;
       color: #EF4444;
-      min-height: 16px;
+      min-height: 14px;
     }
 
     /* ── Error / Success Banners ─────────────────────────────────── */
@@ -256,10 +257,11 @@
       border: 1px solid var(--border-default);
     }
 
-    /* forgot password link */
+    /* forgot password link — right aligned, no extra bottom gap */
     .forgot-password-message {
       margin: 6px 0 0;
       font-size: 0.8125rem;
+      text-align: right;
     }
 
     .forgot-password-message a,
@@ -280,7 +282,7 @@
 
     /* ── Card Actions ────────────────────────────────────────────── */
     .page-card-actions {
-      padding: 20px 28px 28px;
+      padding: 16px 28px 28px;
       display: flex;
       flex-direction: column;
       gap: 10px;
