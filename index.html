@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="title" content="Login">
+  <meta name="language" content="en">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Login">
+  <meta name="twitter:title" content="Login">
+  <meta name="twitter:card" content="summary">
+  <title>Login</title>
+
+  <link
+    rel="shortcut icon"
+    href="https://d16dkiu68lwia0.cloudfront.net/teceze/2026/08/19/Website Settings/XDOCERJW_Splash_image.png"
+    type="image/x-icon"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── CSS Variables ───────────────────────────────────────────── */
+    :root {
+      --brand-primary:       #0CA79C;
+      --brand-primary-dark:  #2A3D8F;
+      --primary-btn-bg:      linear-gradient(90deg, #0CA79C 0%, #2A3D8F 100%);
+      --primary-btn-hover:   linear-gradient(90deg, #0a8e85 0%, #213174 100%);
+      --surface-wrapper:     #F5FBF8;
+      --surface-card:        #FFFFFF;
+      --surface-secondary:   #EBF7F6;
+      --text-main:           #111827;
+      --text-muted:          #4B5563;
+      --text-subtle:         #6B7280;
+      --border-subtle:       #E1EFEA;
+      --border-default:      #CBDDD7;
+      --border-hover:        #A5CCC1;
+      --border-focus:        #0CA79C;
+      --shadow-card:         0 10px 25px -5px rgba(12,167,156,.08), 0 8px 10px -6px rgba(42,61,143,.04);
+      --shadow-btn:          0 4px 14px rgba(12,167,156,.28);
+      --shadow-btn-hover:    0 8px 20px rgba(12,167,156,.38);
+      --focus-ring:          0 0 0 3px rgba(12,167,156,.20);
+      --radius-md:           8px;
+      --radius-lg:           12px;
+      --transition-fast:     all 0.2s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── Reset ───────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background-color: var(--surface-wrapper);
+      min-height: 100vh;
+    }
+
+    ::selection { background: var(--brand-primary); color: #fff; }
+
+    /* ── Layout ──────────────────────────────────────────────────── */
+    .page-content-wrapper {
+      min-height: calc(100vh - 120px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .page_content {
+      padding: 40px 0 60px;
+    }
+
+    /* ── Login Sections ──────────────────────────────────────────── */
+    .for-login,
+    .for-forgot,
+    .for-signup,
+    .for-login-with-email-link {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 0;
+    }
+
+    /* hide all sections by default; JS controls visibility */
+    .for-signup,
+    .for-forgot,
+    .for-login-with-email-link {
+      display: none;
+    }
+
+    .login-content.page-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: var(--transition-fast);
+    }
+
+    /* shake animation for invalid login */
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}
+      20%    {transform:translateX(-6px)}
+      40%    {transform:translateX(6px)}
+      60%    {transform:translateX(-4px)}
+      80%    {transform:translateX(4px)}
+    }
+    .login-content.page-card.invalid-login {
+      animation: shake .45s ease;
+    }
+
+    /* ── Page Card Head ──────────────────────────────────────────── */
+    .page-card-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .app-logo {
+      height: 44px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    .page-card-head-text h4 {
+      margin: 0 0 4px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--brand-primary-dark);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .page-card-subtitle {
+      margin: 0;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Card Body ───────────────────────────────────────────────── */
+    .page-card-body {
+      padding: 24px 28px 0;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* field wrappers for icon positioning */
+    .email-field,
+    .password-field {
+      position: relative;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 9px 38px 9px 12px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: var(--text-main);
+      background: var(--surface-card);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      box-shadow: none;
+      outline: none;
+      transition: var(--transition-fast);
+      appearance: none;
+    }
+
+    .form-control::placeholder { color: var(--text-subtle); opacity: .8; }
+
+    .form-control:hover  { border-color: var(--border-hover); }
+    .form-control:focus  { border-color: var(--border-focus); box-shadow: var(--focus-ring); }
+
+    /* invalid state */
+    .form-group.invalid .form-control { border-color: #EF4444; box-shadow: 0 0 0 3px rgba(239,68,68,.15); }
+
+    /* field icons */
+    .field-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-subtle);
+      pointer-events: none;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-subtle);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    /* shift lock icon left when toggle eye is also present */
+    .password-field .password-icon { right: 36px; }
+
+    .field-error {
+      margin: 4px 0 0;
+      font-size: 0.75rem;
+      color: #EF4444;
+      min-height: 16px;
+    }
+
+    /* ── Error / Success Banners ─────────────────────────────────── */
+    .login-error-banner,
+    .login-success-banner {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .login-error-banner {
+      background: #FEF2F2;
+      color: #B91C1C;
+      border: 1px solid #FECACA;
+    }
+
+    .login-success-banner {
+      background: #EBF7F6;
+      color: var(--brand-primary-dark);
+      border: 1px solid var(--border-default);
+    }
+
+    /* forgot password link */
+    .forgot-password-message {
+      margin: 6px 0 0;
+      font-size: 0.8125rem;
+    }
+
+    .forgot-password-message a,
+    .sign-up-message a,
+    .resend-link a {
+      color: var(--brand-primary) !important;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .forgot-password-message a:hover,
+    .sign-up-message a:hover,
+    .resend-link a:hover {
+      color: var(--brand-primary-dark) !important;
+      text-decoration: underline !important;
+    }
+
+    /* ── Card Actions ────────────────────────────────────────────── */
+    .page-card-actions {
+      padding: 20px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ── Buttons ─────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      font-size: 0.875rem;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      text-decoration: none;
+      transition: var(--transition-fast);
+      border-radius: var(--radius-md);
+      white-space: nowrap;
+    }
+
+    .btn-sm  { padding: 9px 18px; font-size: 0.875rem; }
+    .btn-md  { padding: 10px 22px; font-size: 0.9rem; }
+    .btn-block { width: 100%; }
+
+    /* Login / Primary button */
+    .btn-login,
+    .btn-primary {
+      background: var(--primary-btn-bg) !important;
+      color: #fff !important;
+      font-weight: 700 !important;
+      border: none !important;
+      box-shadow: var(--shadow-btn);
+    }
+
+    .btn-login:hover,
+    .btn-primary:hover {
+      background: var(--primary-btn-hover) !important;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-btn-hover);
+      color: #fff !important;
+    }
+
+    .btn-login:active,
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-btn);
+    }
+
+    .btn-login:focus,
+    .btn-primary:focus {
+      box-shadow: var(--focus-ring);
+    }
+
+    /* Secondary / Default button */
+    .btn-default:not(.btn-login),
+    .btn-secondary:not(.btn-login) {
+      background: var(--surface-card) !important;
+      border: 1px solid var(--border-default) !important;
+      color: var(--brand-primary) !important;
+      font-weight: 600 !important;
+    }
+
+    .btn-default:not(.btn-login):hover,
+    .btn-secondary:not(.btn-login):hover {
+      background: var(--surface-secondary) !important;
+      border-color: var(--brand-primary) !important;
+      color: var(--brand-primary-dark) !important;
+    }
+
+    .btn:disabled,
+    .btn[disabled] {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* indicator badge */
+    .indicator {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .indicator.gray { background: #F3F4F6; color: var(--text-muted); }
+    .indicator.blue { background: #EFF6FF; color: #1D4ED8; }
+
+    /* signup disabled message */
+    .signup-disabled-message {
+      padding: 24px 28px 28px;
+      text-align: center;
+    }
+
+    .signup-disabled-message p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin: 8px 0 20px;
+    }
+
+    .sign-up-message {
+      text-align: center;
+      padding: 0 28px 24px;
+      font-size: 0.8125rem;
+    }
+
+    .resend-link {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    .web-footer {
+      background: var(--surface-card);
+      border-top: 1px solid var(--border-subtle);
+      padding: 28px 0 20px;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .footer-logo-extension { margin-bottom: 16px; }
+
+    .footer-logo { height: 36px; width: auto; }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -8px;
+    }
+
+    .col-md-6, .col-sm-6, .col-12 {
+      padding: 0 8px;
+      flex: 1 1 50%;
+    }
+
+    .text-left  { text-align: left; }
+    .text-right { text-align: right; }
+
+    .footer-col-right.footer-powered {
+      text-align: right;
+    }
+
+    .footer-info {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+      margin-top: 10px;
+    }
+
+    /* ── General Links ───────────────────────────────────────────── */
+    a {
+      color: var(--brand-primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    a:hover {
+      color: var(--brand-primary-dark);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    small { color: var(--text-subtle); }
+
+    /* ── Password field icon SVGs ────────────────────────────────── */
+    .icon-svg {
+      width: 16px; height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .page_content { padding: 20px 0 40px; }
+      .page-card-head { padding: 20px 20px 16px; }
+      .page-card-body { padding: 18px 20px 0; }
+      .page-card-actions { padding: 16px 20px 22px; }
+      .signup-disabled-message { padding: 18px 20px 22px; }
+      .sign-up-message { padding: 0 20px 18px; }
+      .col-md-6, .col-sm-6 { flex: 1 1 100%; }
+      .footer-col-right.footer-powered { text-align: left; }
+    }
+  </style>
+</head>
+
+<body data-path="login">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--  MAIN CONTENT                                                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="page-login" data-path="login">
+  <div class="page-content-wrapper">
+
+    <main class="container">
+      <div class="page_content">
+
+        <!-- ┌──────────────────────────────────────────────────────┐ -->
+        <!-- │  SIGN IN SECTION                                      │ -->
+        <!-- └──────────────────────────────────────────────────────┘ -->
+        <section class="for-login">
+          <div class="login-content page-card">
+
+            <!-- head -->
+            <div class="page-card-head">
+              <img class="app-logo"
+                src="https://d16dkiu68lwia0.cloudfront.net/teceze/2026/09/16/Website Settings/TLZZ4LGW_Frappy_erp_logo_1.svg"
+                alt="Logo">
+              <div class="page-card-head-text">
+                <h4>Sign In</h4>
+                <p class="page-card-subtitle">Welcome! Please sign in to continue.</p>
+              </div>
+            </div>
+
+            <!-- form -->
+            <form class="form-signin form-login" role="form" novalidate>
+              <div class="page-card-body">
+
+                <!-- error banner -->
+                <div class="login-error-banner" role="alert">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                  <span></span>
+                </div>
+
+                <!-- email -->
+                <div class="form-group">
+                  <label class="form-label" for="login_email">Email</label>
+                  <div class="email-field">
+                    <input type="text" id="login_email" class="form-control"
+                      placeholder="jane@example.com"
+                      required autofocus autocomplete="username">
+                    <svg class="field-icon email-icon icon-svg" viewBox="0 0 24 24">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                  </div>
+                  <p class="field-error"></p>
+                </div>
+
+                <!-- password -->
+                <div class="form-group">
+                  <label class="form-label" for="login_password">Password</label>
+                  <div class="password-field">
+                    <input type="password" id="login_password" class="form-control"
+                      placeholder="•••••"
+                      autocomplete="current-password" required>
+                    <svg class="field-icon password-icon icon-svg" viewBox="0 0 24 24">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0110 0v4"/>
+                    </svg>
+                    <!-- toggle eye -->
+                    <svg class="toggle-password icon-svg" id="eye-icon" viewBox="0 0 24 24"
+                      title="Toggle password visibility">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </div>
+                  <p class="field-error"></p>
+                  <p class="forgot-password-message">
+                    <a href="#forgot">Forgot password?</a>
+                  </p>
+                </div>
+
+              </div><!-- /page-card-body -->
+
+              <div class="page-card-actions">
+                <button class="btn btn-sm btn-default btn-block btn-login" type="submit">
+                  Continue
+                </button>
+              </div>
+            </form>
+
+          </div><!-- /page-card -->
+        </section><!-- /for-login -->
+
+
+        <!-- ┌──────────────────────────────────────────────────────┐ -->
+        <!-- │  SIGN UP (DISABLED) SECTION                           │ -->
+        <!-- └──────────────────────────────────────────────────────┘ -->
+        <section class="for-signup signup-disabled">
+          <div class="login-content page-card">
+
+            <div class="page-card-head">
+              <img class="app-logo"
+                src="https://d16dkiu68lwia0.cloudfront.net/teceze/2026/09/16/Website Settings/TLZZ4LGW_Frappy_erp_logo_1.svg"
+                alt="Logo">
+              <div class="page-card-head-text">
+                <h4>Sign Up</h4>
+                <p class="page-card-subtitle">Let's setup your account.</p>
+              </div>
+            </div>
+
+            <div class="signup-disabled-message">
+              <span class="indicator gray">Signup Disabled</span>
+              <p class="text-muted text-normal sign-up-message mt-1 mb-8">
+                Signups have been disabled for this website.
+              </p>
+              <div><a href="/" class="btn btn-primary btn-md">Home</a></div>
+            </div>
+
+          </div>
+        </section><!-- /for-signup -->
+
+
+        <!-- ┌──────────────────────────────────────────────────────┐ -->
+        <!-- │  FORGOT PASSWORD SECTION                              │ -->
+        <!-- └──────────────────────────────────────────────────────┘ -->
+        <section class="for-forgot">
+          <div class="login-content page-card">
+
+            <div class="page-card-head">
+              <img class="app-logo"
+                src="https://d16dkiu68lwia0.cloudfront.net/teceze/2026/09/16/Website Settings/TLZZ4LGW_Frappy_erp_logo_1.svg"
+                alt="Logo">
+              <div class="page-card-head-text">
+                <h4>Forgot Password?</h4>
+                <p class="page-card-subtitle">Please enter your email, we'll send you password reset link</p>
+              </div>
+            </div>
+
+            <form class="form-signin form-forgot" role="form" novalidate>
+              <div class="page-card-body">
+                <div class="form-group">
+                  <label class="form-label" for="forgot_email">Email</label>
+                  <div class="email-field">
+                    <input type="email" id="forgot_email" class="form-control"
+                      placeholder="jane@example.com" required autocomplete="username">
+                    <svg class="field-icon email-icon icon-svg" viewBox="0 0 24 24">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                  </div>
+                  <p class="field-error"></p>
+                </div>
+              </div>
+
+              <div class="page-card-actions">
+                <button class="btn btn-sm btn-primary btn-block btn-signup btn-forgot"
+                  type="submit" disabled>Send Link</button>
+              </div>
+            </form>
+
+            <div class="text-center sign-up-message">
+              <a href="#login">Back to sign in</a>
+            </div>
+
+          </div>
+        </section><!-- /for-forgot -->
+
+
+        <!-- ┌──────────────────────────────────────────────────────┐ -->
+        <!-- │  LOGIN WITH EMAIL LINK SECTION                        │ -->
+        <!-- └──────────────────────────────────────────────────────┘ -->
+        <section class="for-login-with-email-link">
+          <div class="login-content page-card">
+
+            <div class="page-card-head">
+              <img class="app-logo"
+                src="https://d16dkiu68lwia0.cloudfront.net/teceze/2026/09/16/Website Settings/TLZZ4LGW_Frappy_erp_logo_1.svg"
+                alt="Logo">
+              <div class="page-card-head-text">
+                <h4>Sign In</h4>
+                <p class="page-card-subtitle">Welcome! Please sign in to continue.</p>
+              </div>
+            </div>
+
+            <form class="form-signin form-login-with-email-link" role="form" novalidate>
+              <div class="page-card-body">
+
+                <div class="login-success-banner" role="status">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                  <span>Please check your email.</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="login_with_email_link_email">Email</label>
+                  <div class="email-field">
+                    <input type="email" id="login_with_email_link_email" class="form-control"
+                      placeholder="jane@example.com" required autocomplete="username">
+                    <svg class="field-icon email-icon icon-svg" viewBox="0 0 24 24">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                  </div>
+                  <p class="field-error"></p>
+                </div>
+
+              </div>
+
+              <div class="page-card-actions">
+                <p class="resend-link">
+                  Didn't receive the link? <a href="#" class="btn-resend-link">Resend</a>
+                </p>
+                <button class="btn btn-sm btn-primary btn-block btn-login btn-login-with-email-link"
+                  type="submit">Send login link</button>
+                <a href="#login" class="btn btn-sm btn-default btn-block btn-login-option">
+                  Login with password</a>
+              </div>
+            </form>
+
+          </div>
+        </section><!-- /for-login-with-email-link -->
+
+      </div><!-- /page_content -->
+
+      <div class="page-footer"></div>
+    </main>
+
+  </div><!-- /page-content-wrapper -->
+</div><!-- /page-login -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--  FOOTER                                                         -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<footer class="web-footer">
+  <div class="container">
+
+    <div class="footer-logo-extension">
+      <div class="row">
+        <div class="text-left col-md-6">
+          <img alt="Footer Logo" class="footer-logo"
+            src="https://d16dkiu68lwia0.cloudfront.net/teceze/2026/08/19/Website Settings/GCAVJ3WB_Brand_logo.png"/>
+        </div>
+        <div class="text-right col-md-6"></div>
+      </div>
+    </div>
+
+    <div class="footer-info">
+      <div class="row">
+        <div class="footer-col-left col-sm-6 col-12">
+          © 2026 Teceze. All rights reserved.<br>
+          105, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600032
+        </div>
+        <div class="footer-col-right col-sm-6 col-12 footer-powered">
+          Powered By TECEZE Consultancy Pvt. Ltd.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--  JAVASCRIPT — routing & interactions (no jQuery dependency)     -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  "use strict";
+
+  /* ── helpers ──────────────────────────────────────────────── */
+  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+  function $$(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  /* ── section display ──────────────────────────────────────── */
+  var SECTIONS = ['.for-login', '.for-forgot', '.for-signup', '.for-login-with-email-link'];
+
+  function hideAll() {
+    SECTIONS.forEach(function (sel) {
+      var el = $(sel);
+      if (el) el.style.display = 'none';
+    });
+    // reset forms (but not login form — keep email value)
+    $$('.form-forgot input, .form-login-with-email-link input').forEach(function (inp) {
+      inp.value = '';
+    });
+    clearErrors();
+  }
+
+  function show(sel) {
+    hideAll();
+    var el = $(sel);
+    if (el) el.style.display = 'flex';
+  }
+
+  function clearErrors() {
+    $$('.field-error').forEach(function (el) { el.textContent = ''; });
+    $$('.form-group').forEach(function (el) { el.classList.remove('invalid'); });
+    $$('.login-error-banner').forEach(function (el) { el.style.display = 'none'; });
+    $$('.page-card-body').forEach(function (el) { el.classList.remove('invalid'); });
+  }
+
+  /* ── field error ──────────────────────────────────────────── */
+  function showFieldError(inputId, message) {
+    var input = document.getElementById(inputId);
+    if (!input) return;
+    var group = input.closest('.form-group');
+    if (group) {
+      group.classList.add('invalid');
+      var err = group.querySelector('.field-error');
+      if (err) err.textContent = message;
+    }
+  }
+
+  function showErrorBanner(message) {
+    var banner = $('section:not([style*="none"]) .login-error-banner') ||
+                 $('.for-login .login-error-banner');
+    if (banner) {
+      banner.style.display = 'flex';
+      var span = banner.querySelector('span');
+      if (span) span.textContent = message;
+    }
+  }
+
+  /* ── routes ───────────────────────────────────────────────── */
+  function route() {
+    var hash = window.location.hash.slice(1) || 'login';
+    hash = hash.replace(/-/g, '_');
+
+    switch (hash) {
+      case 'forgot':
+        show('.for-forgot');
+        // pre-fill email if available
+        var loginEmail = document.getElementById('login_email');
+        var forgotEmail = document.getElementById('forgot_email');
+        if (loginEmail && forgotEmail && loginEmail.value) {
+          forgotEmail.value = loginEmail.value;
+          var btnForgot = $('.btn-forgot');
+          if (btnForgot) btnForgot.disabled = false;
+        }
+        var fe = document.getElementById('forgot_email');
+        if (fe) fe.focus();
+        break;
+
+      case 'signup':
+        show('.for-signup');
+        break;
+
+      case 'login_with_email_link':
+        show('.for-login-with-email-link');
+        var llEmail = document.getElementById('login_with_email_link_email');
+        var leEmail = document.getElementById('login_email');
+        if (llEmail && leEmail && leEmail.value) {
+          llEmail.value = leEmail.value;
+        }
+        if (llEmail) llEmail.focus();
+        break;
+
+      default: // 'login'
+        show('.for-login');
+        break;
+    }
+  }
+
+  /* ── login form ───────────────────────────────────────────── */
+  function handleLogin(e) {
+    e.preventDefault();
+    clearErrors();
+
+    var usr = (document.getElementById('login_email').value || '').trim();
+    var pwd = document.getElementById('login_password').value;
+    var hasError = false;
+
+    if (!usr) {
+      showFieldError('login_email', 'Email is required.');
+      hasError = true;
+    }
+    if (!pwd) {
+      showFieldError('login_password', 'Password is required.');
+      hasError = true;
+    }
+    if (hasError) return;
+
+    // UI feedback — simulate "verifying"
+    var btn = $('.for-login .btn-login');
+    if (btn) { btn.textContent = 'Verifying…'; btn.disabled = true; }
+
+    // Since this is a static demo, show a friendly error after a short delay
+    setTimeout(function () {
+      if (btn) { btn.textContent = 'Continue'; btn.disabled = false; }
+      showErrorBanner('Invalid credentials, try again.');
+      var card = $('.for-login .login-content.page-card');
+      if (card) {
+        card.classList.add('invalid-login');
+        setTimeout(function () { card.classList.remove('invalid-login'); }, 500);
+      }
+    }, 800);
+  }
+
+  /* ── forgot form ──────────────────────────────────────────── */
+  function handleForgot(e) {
+    e.preventDefault();
+    var email = (document.getElementById('forgot_email').value || '').trim();
+    if (!email || !validateEmail(email)) {
+      showFieldError('forgot_email', 'Invalid Email.');
+      return;
+    }
+    var btn = $('.btn-forgot');
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+    setTimeout(function () {
+      if (btn) { btn.textContent = 'Sent ✓'; }
+    }, 800);
+  }
+
+  /* ── toggle password visibility ───────────────────────────── */
+  function initPasswordToggle() {
+    var eyeIcon = document.getElementById('eye-icon');
+    var pwdInput = document.getElementById('login_password');
+    if (!eyeIcon || !pwdInput) return;
+
+    eyeIcon.addEventListener('click', function () {
+      var isPassword = pwdInput.type === 'password';
+      pwdInput.type = isPassword ? 'text' : 'password';
+      // swap icon: eye vs eye-off
+      eyeIcon.innerHTML = isPassword
+        ? '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>' +
+          '<path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/>' +
+          '<line x1="1" y1="1" x2="23" y2="23"/>'
+        : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+    });
+  }
+
+  /* ── live input clear ─────────────────────────────────────── */
+  function initInputClear() {
+    $$('.page-card-body input').forEach(function (inp) {
+      inp.addEventListener('input', function () {
+        var group = this.closest('.form-group');
+        if (group) {
+          group.classList.remove('invalid');
+          var err = group.querySelector('.field-error');
+          if (err) err.textContent = '';
+        }
+        var banner = $('section:not([style*="none"]) .login-error-banner');
+        if (banner) banner.style.display = 'none';
+      });
+    });
+  }
+
+  /* ── forgot email input: enable/disable button ────────────── */
+  function initForgotEmail() {
+    var inp = document.getElementById('forgot_email');
+    var btn = $('.btn-forgot');
+    if (!inp || !btn) return;
+    inp.addEventListener('input', function () {
+      btn.disabled = !this.value.trim();
+    });
+  }
+
+  /* ── email link form ──────────────────────────────────────── */
+  function handleEmailLink(e) {
+    e.preventDefault();
+    var email = (document.getElementById('login_with_email_link_email').value || '').trim();
+    if (!email || !validateEmail(email)) {
+      showFieldError('login_with_email_link_email', 'Invalid Email.');
+      return;
+    }
+    var btn = $('.btn-login-with-email-link');
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+    setTimeout(function () {
+      if (btn) { btn.textContent = 'Sent ✓'; }
+      var banner = $('.for-login-with-email-link .login-success-banner');
+      if (banner) banner.style.display = 'flex';
+      var resend = $('.for-login-with-email-link .resend-link');
+      if (resend) resend.style.display = 'flex';
+    }, 800);
+  }
+
+  /* ── resend link ──────────────────────────────────────────── */
+  function initResend() {
+    var resendBtn = $('.btn-resend-link');
+    if (!resendBtn) return;
+    resendBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var form = $('.form-login-with-email-link');
+      if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    });
+  }
+
+  /* ── init ─────────────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function () {
+    // attach form handlers
+    var loginForm = $('.form-login');
+    if (loginForm) loginForm.addEventListener('submit', handleLogin);
+
+    var forgotForm = $('.form-forgot');
+    if (forgotForm) forgotForm.addEventListener('submit', handleForgot);
+
+    var emailLinkForm = $('.form-login-with-email-link');
+    if (emailLinkForm) emailLinkForm.addEventListener('submit', handleEmailLink);
+
+    initPasswordToggle();
+    initInputClear();
+    initForgotEmail();
+    initResend();
+
+    // show footer
+    var footer = document.querySelector('.web-footer');
+    if (footer) footer.style.display = 'block';
+
+    // initial route
+    route();
+  });
+
+  window.addEventListener('hashchange', route);
+
+})();
+</script>
+
+</body>
+</html>
